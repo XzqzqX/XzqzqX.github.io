@@ -21,7 +21,7 @@ repository               : "XzqzqX/XzqzqX.github.io"
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar           : "profile.png"
+  avatar           : "个人主页头像.png"
   name             : "Ziqiao Xu"
   pronouns         : # example: "she/her"  
   bio              : "A college student majoring in mathematics"
