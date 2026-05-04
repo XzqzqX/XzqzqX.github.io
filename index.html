@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Name — Researcher</title>
+  <title>Ziqiao Xu — Mathematics</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
   <style>
@@ -177,40 +177,37 @@
 
     .btn-ghost:hover { border-color: var(--accent2); color: var(--accent2); }
 
-    /* Hero right: stats panel */
-    .hero-panel {
+    .hero-photo {
       padding-top: 6rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1px;
+      position: relative;
+    }
+
+    .hero-photo img {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      filter: grayscale(100%);
+      opacity: 0.85;
+    }
+
+    .photo-placeholder {
+      display: none;
+      width: 100%;
+      aspect-ratio: 3 / 4;
       border: 1px solid var(--border);
-      border-radius: 4px;
-      overflow: hidden;
-    }
-
-    .panel-row {
-      display: flex;
-      padding: 1.2rem 1.6rem;
-      background: var(--bg2);
-      border-bottom: 1px solid var(--border);
-      align-items: baseline;
-      gap: 1rem;
-    }
-
-    .panel-row:last-child { border-bottom: none; }
-
-    .panel-label {
+      align-items: center;
+      justify-content: center;
       font-family: var(--mono);
-      font-size: 0.68rem;
-      color: var(--muted);
-      letter-spacing: 0.1em;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
-      min-width: 110px;
+      color: var(--muted);
     }
 
-    .panel-value {
-      font-size: 0.95rem;
-      color: var(--text);
+    .hero-photo img[style*="display:none"] + .photo-placeholder {
+      display: flex;
     }
 
     /* ─── SECTIONS ─── */
@@ -378,7 +375,7 @@
       nav { padding: 1.2rem 1.5rem; }
       .nav-links { gap: 1.5rem; }
       #hero { grid-template-columns: 1fr; padding: 0 1.5rem; min-height: auto; padding-top: 7rem; padding-bottom: 4rem; }
-      .hero-panel { display: none; }
+      .hero-photo { display: none; }
       .about-grid { grid-template-columns: 1fr; }
       .contact-grid { grid-template-columns: 1fr; }
       .contact-item { border-right: none !important; }
@@ -409,41 +406,21 @@
 <!-- ─── HERO ─── -->
 <section id="hero" style="border:none; opacity:1; transform:none; max-width:100%; padding:0 3rem;">
   <div class="hero-text">
-    <p class="hero-tag">Researcher · University Name</p>
-    <h1>Your <em>Name</em></h1>
-    <p class="hero-title">PhD Candidate / Assistant Professor · Department of ___</p>
+    <p class="hero-tag">North China Electric Power University</p>
+    <h1>Ziqiao Xu</h1>
+    <p class="hero-title">Undergraduate · Department of Mathematics and Physics</p>
     <p class="hero-bio">
       <!-- 修改这里：一两句话说明你的研究方向和所在机构 -->
-      I study [your research area] at [University Name]. My work focuses on [core problem], with applications in [domain].
+      Welcome to my page! I am an undergraduate student at North China Electric Power University, 
+      majoring in Mathematics. I am interested in number theory, algebraic geometry, representation theory and playing Valorant.
     </p>
   </div>
 
-  <div class="hero-panel">
-    <!-- 修改这里：填写你的基本信息 -->
-    <div class="panel-row">
-      <span class="panel-label">Position</span>
-      <span class="panel-value">PhD Candidate</span>
-    </div>
-    <div class="panel-row">
-      <span class="panel-label">Institution</span>
-      <span class="panel-value">University Name</span>
-    </div>
-    <div class="panel-row">
-      <span class="panel-label">Department</span>
-      <span class="panel-value">Computer Science</span>
-    </div>
-    <div class="panel-row">
-      <span class="panel-label">Advisor</span>
-      <span class="panel-value">Prof. Advisor Name</span>
-    </div>
-    <div class="panel-row">
-      <span class="panel-label">Location</span>
-      <span class="panel-value">City, Country</span>
-    </div>
-    <div class="panel-row">
-      <span class="panel-label">Email</span>
-      <span class="panel-value">you@university.edu</span>
-    </div>
+  <div class="hero-photo">
+    <!-- 修改 src 为你的照片路径，如 images/photo.jpg -->
+    <!-- 建议使用正方形或竖向裁剪的照片 -->
+    <img src="nailong.png" alt="Your Name" onerror="this.style.display='none'">
+    <div class="photo-placeholder">Photo</div>
   </div>
 </section>
 
@@ -453,9 +430,9 @@
   <hr class="section-divider">
   <div class="about-text">
       <!-- 修改这里：个人介绍，把研究方向也包含进来，2-3段 -->
-      <p>I am a [position] in the [Department] at [University], advised by [Advisor Name]. My research lies at the intersection of [Field A] and [Field B], with a focus on [specific topic].</p>
-      <p>Previously, I received my [degree] from [Previous Institution]. I have also spent time as a research intern at [Company/Lab].</p>
-      <p>Outside of research, I [hobby or personal note — optional].</p>
+      <p>I am an undergraduate student in the Department of Mathematics and Physics at North China Electric Power University. My research interests include number theory, algebraic geometry, and representation theory.</p>
+      <p>I am going to pursue a master's degree through ALGANT program() in the next two years.</p>
+      <p>Outside of mathematics, I enjoy watching movies and playing Valorant.</p>
     </div>
 </section>
 
@@ -469,45 +446,16 @@
     <div class="pub-item">
       <span class="pub-year">2024</span>
       <div>
-        <p class="pub-title">Your Paper Title: A Study of Something Interesting</p>
-        <p class="pub-authors">Your Name, Co-author A, Co-author B</p>
-        <p class="pub-venue">Conference / Journal Name (VENUE'24)</p>
+        <p class="pub-title">Generalizations of Catalan Numbers and Combinatorics</p>
+        <p class="pub-authors">Z, Xu, Z, Liu, Z, Wang</p>
+        <p class="pub-venue">The 7th International Conference on Computing and Data Science(2025),2755-2721</p>
         <div class="pub-links">
-          <a href="#">PDF</a>
-          <a href="#">arXiv</a>
-          <a href="#">Code</a>
-          <a href="#">Bibtex</a>
+          <a href="catalan.pdf">PDF</a>
         </div>
       </div>
     </div>
 
-    <div class="pub-item">
-      <span class="pub-year">2023</span>
-      <div>
-        <p class="pub-title">Another Paper Title: Towards Better Understanding</p>
-        <p class="pub-authors">Your Name, Co-author C</p>
-        <p class="pub-venue">Workshop / Conference Name (VENUE'23)</p>
-        <div class="pub-links">
-          <a href="#">PDF</a>
-          <a href="#">arXiv</a>
-          <a href="#">Slides</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="pub-item">
-      <span class="pub-year">2022</span>
-      <div>
-        <p class="pub-title">Early Work: Foundations of My Research Direction</p>
-        <p class="pub-authors">Your Name, Advisor Name, Co-author D</p>
-        <p class="pub-venue">Journal of Important Research</p>
-        <div class="pub-links">
-          <a href="#">PDF</a>
-          <a href="#">DOI</a>
-        </div>
-      </div>
-    </div>
-
+    
   </div>
 </section>
 
@@ -521,12 +469,12 @@
     <div class="pub-item">
       <span class="pub-year">2025</span>
       <div>
-        <p class="pub-title">Preprint Title: Work in Progress</p>
-        <p class="pub-authors">Your Name, Co-author A</p>
+        <p class="pub-title">Recurrence relations for the coefficients of the confluent and Gauss hypergeometric functions in the complex plane</p>
+        <p class="pub-authors">Zi-Qiao Xu, Zhong-Xuan Mao, Jing-Feng Tian</p>
         <p class="pub-venue">arXiv preprint</p>
         <div class="pub-links">
-          <a href="#">arXiv</a>
-          <a href="#">PDF</a>
+          <a href="https://arxiv.org/abs/2603.16465">arXiv</a>
+          <a href="https://arxiv.org/pdf/2603.16465">PDF</a>
         </div>
       </div>
     </div>
@@ -540,10 +488,10 @@
   <hr class="section-divider">
   <div class="cv-section">
     <p class="cv-desc">
-      My full curriculum vitae includes education history, publications, talks, teaching experience, and awards. Last updated [Month Year].
+      Below is my curriculum vitae, you can download it using the link below. Last updated 03/2026.
     </p>
     <!-- 修改 href 为你的 CV 文件路径 -->
-    <a href="files/cv.pdf" class="text-link" download>Download CV (PDF)</a>
+    <a href="CV.pdf" class="text-link" download>Download CV (PDF)</a>
   </div>
 </section>
 
@@ -552,11 +500,11 @@
   <h2>Contact</h2>
   <hr class="section-divider">
   <!-- 修改为你的邮箱 -->
-  <a href="mailto:you@university.edu" class="contact-email-line">you@university.edu</a>
+  <a href="mailto:ziqiaoxu678@gmail.com" class="contact-email-line">ziqiaoxu678@gmail.com</a>
 </section>
 
 <footer>
-  <p>© 2024 Your Name · Built with plain HTML</p>
+  <p>© 2025 Ziqiao Xu</p>
 </footer>
 
 <script>
