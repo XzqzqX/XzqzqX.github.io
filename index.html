@@ -1,21 +1,578 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh">
 <head>
   <meta charset="UTF-8">
-  <title>Ziqiao Xu's HomePage</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Name — Researcher</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
   <style>
-    body { font-family: Arial, sans-serif; background:#f4f4f9; text-align:center; padding:50px; }
-    h1 { color:#333; }
-    p { color:#555; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #0e0e0f;
+      --bg2:      #141416;
+      --bg3:      #1c1c1f;
+      --border:   rgba(255,255,255,0.07);
+      --border2:  rgba(255,255,255,0.13);
+      --text:     #e8e4dc;
+      --muted:    #6e6e6e;
+      --accent:   #c0c0c0;
+      --accent2:  #a0a0a0;
+      --serif:    'EB Garamond', Georgia, serif;
+      --mono:     'DM Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--serif);
+      font-size: 17px;
+      line-height: 1.75;
+      min-height: 100vh;
+    }
+
+    /* Grain overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.6;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.4rem 3rem;
+      background: rgba(14,14,15,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-name {
+      font-family: var(--serif);
+      font-size: 1rem;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    /* ─── HERO ─── */
+    #hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 0 3rem;
+      gap: 4rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-text { padding-top: 6rem; }
+
+    .hero-tag {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 1.2rem;
+    }
+
+    h1 {
+      font-size: clamp(2.8rem, 5vw, 4.2rem);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.3rem;
+    }
+
+    h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-title {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      margin-bottom: 2rem;
+    }
+
+    .hero-bio {
+      font-size: 1.05rem;
+      color: #b8b4ac;
+      max-width: 46ch;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    /* Banner image */
+    .banner {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      filter: grayscale(100%);
+      opacity: 0.75;
+    }
+
+    .btn {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 0.7rem 1.6rem;
+      border-radius: 2px;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #0e0e0f;
+    }
+
+    .btn-primary:hover { background: #d0d0d0; }
+
+    .btn-ghost {
+      border: 1px solid var(--border2);
+      color: var(--muted);
+    }
+
+    .btn-ghost:hover { border-color: var(--accent2); color: var(--accent2); }
+
+    /* Hero right: stats panel */
+    .hero-panel {
+      padding-top: 6rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .panel-row {
+      display: flex;
+      padding: 1.2rem 1.6rem;
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+      align-items: baseline;
+      gap: 1rem;
+    }
+
+    .panel-row:last-child { border-bottom: none; }
+
+    .panel-label {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      min-width: 110px;
+    }
+
+    .panel-value {
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+
+    /* ─── SECTIONS ─── */
+    section {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 6rem 2rem;
+      border-bottom: 1px solid var(--border);
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    section.visible { opacity: 1; transform: none; }
+
+    h2 {
+      font-size: 2rem;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.4rem;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0 0 2.5rem 0;
+    }
+
+    /* ─── UNDERLINE LINK ─── */
+    .text-link {
+      font-family: var(--serif);
+      font-size: 1rem;
+      color: var(--text);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-color: var(--muted);
+      transition: text-decoration-color 0.2s;
+    }
+
+    .text-link:hover {
+      text-decoration-color: var(--text);
+    }
+
+    /* ─── ABOUT ─── */
+    .about-text p { margin-bottom: 1.1rem; color: #c0bbb2; }
+
+    /* ─── PUBLICATIONS ─── */
+    .pub-list { display: flex; flex-direction: column; gap: 0; }
+
+    .pub-item {
+      padding: 1.6rem 0;
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 60px 1fr;
+      gap: 1.5rem;
+      align-items: start;
+      transition: background 0.2s;
+    }
+
+    .pub-item:hover { background: rgba(255,255,255,0.015); }
+    .pub-item:first-child { border-top: 1px solid var(--border); }
+
+    .pub-year {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--muted);
+      padding-top: 0.2rem;
+      letter-spacing: 0.05em;
+    }
+
+    .pub-title {
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--text);
+      margin-bottom: 0.3rem;
+    }
+
+    .pub-authors {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-bottom: 0.3rem;
+    }
+
+    .pub-venue {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--accent2);
+    }
+
+    .pub-links {
+      margin-top: 0.6rem;
+      display: flex;
+      gap: 0.8rem;
+    }
+
+    .pub-links a {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+
+    .pub-links a:hover { border-color: var(--accent); }
+
+    /* ─── CV ─── */
+    .cv-section {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .cv-desc {
+      font-size: 1rem;
+      color: #b0aba2;
+      max-width: 52ch;
+    }
+
+    /* ─── CONTACT ─── */
+    .contact-email-line {
+      font-family: var(--serif);
+      font-size: 1rem;
+      color: var(--text);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-color: var(--muted);
+      transition: text-decoration-color 0.2s;
+    }
+
+    .contact-email-line:hover {
+      text-decoration-color: var(--text);
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      opacity: 0.6;
+    }
+
+    /* ─── SCROLL LINE ─── */
+    .progress-bar {
+      position: fixed;
+      top: 0; left: 0;
+      height: 2px;
+      background: var(--accent);
+      z-index: 200;
+      transition: width 0.1s linear;
+      opacity: 0.7;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { gap: 1.5rem; }
+      #hero { grid-template-columns: 1fr; padding: 0 1.5rem; min-height: auto; padding-top: 7rem; padding-bottom: 4rem; }
+      .hero-panel { display: none; }
+      .about-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .contact-item { border-right: none !important; }
+      section { padding: 4rem 1.5rem; }
+    }
   </style>
 </head>
 <body>
-  <h1>Hello, Welcome to Ziqiao Xu's HomePage.</h1>
-  <img src="image/nailong.png" alt="My photo" width="300">
-  <p>My name is Ziqiao Xu. 
-    I am an undergraduate majoring in mathematics in North China Electric Power University.<br>
-    I am interested in some number theory, algebra and modern analysis.<br>
-    My email is ziqiaoxu678@gmail.com or 676592615@qq.com.</p>
+
+<div class="progress-bar" id="progress"></div>
+
+<!-- ─── BANNER IMAGE ─── -->
+<!-- 修改 src 为你的图片路径，如 images/banner.jpg -->
+<!-- 建议图片尺寸：宽 1600px 以上，高 400-600px，横向扁平构图 -->
+<img class="banner" src="images/banner.jpg" alt="banner">
+
+<nav>
+  <span class="nav-name">Your Name</span>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#publications">Publications</a></li>
+    <li><a href="#preprints">Preprints</a></li>
+    <li><a href="#cv">CV</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section id="hero" style="border:none; opacity:1; transform:none; max-width:100%; padding:0 3rem;">
+  <div class="hero-text">
+    <p class="hero-tag">Researcher · University Name</p>
+    <h1>Your <em>Name</em></h1>
+    <p class="hero-title">PhD Candidate / Assistant Professor · Department of ___</p>
+    <p class="hero-bio">
+      <!-- 修改这里：一两句话说明你的研究方向和所在机构 -->
+      I study [your research area] at [University Name]. My work focuses on [core problem], with applications in [domain].
+    </p>
+  </div>
+
+  <div class="hero-panel">
+    <!-- 修改这里：填写你的基本信息 -->
+    <div class="panel-row">
+      <span class="panel-label">Position</span>
+      <span class="panel-value">PhD Candidate</span>
+    </div>
+    <div class="panel-row">
+      <span class="panel-label">Institution</span>
+      <span class="panel-value">University Name</span>
+    </div>
+    <div class="panel-row">
+      <span class="panel-label">Department</span>
+      <span class="panel-value">Computer Science</span>
+    </div>
+    <div class="panel-row">
+      <span class="panel-label">Advisor</span>
+      <span class="panel-value">Prof. Advisor Name</span>
+    </div>
+    <div class="panel-row">
+      <span class="panel-label">Location</span>
+      <span class="panel-value">City, Country</span>
+    </div>
+    <div class="panel-row">
+      <span class="panel-label">Email</span>
+      <span class="panel-value">you@university.edu</span>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ABOUT ─── -->
+<section id="about">
+  <h2>About Me</h2>
+  <hr class="section-divider">
+  <div class="about-text">
+      <!-- 修改这里：个人介绍，把研究方向也包含进来，2-3段 -->
+      <p>I am a [position] in the [Department] at [University], advised by [Advisor Name]. My research lies at the intersection of [Field A] and [Field B], with a focus on [specific topic].</p>
+      <p>Previously, I received my [degree] from [Previous Institution]. I have also spent time as a research intern at [Company/Lab].</p>
+      <p>Outside of research, I [hobby or personal note — optional].</p>
+    </div>
+</section>
+
+<!-- ─── PUBLICATIONS ─── -->
+<section id="publications">
+  <h2>Publications</h2>
+  <hr class="section-divider">
+  <div class="pub-list">
+
+    <!-- 复制此块添加更多论文 -->
+    <div class="pub-item">
+      <span class="pub-year">2024</span>
+      <div>
+        <p class="pub-title">Your Paper Title: A Study of Something Interesting</p>
+        <p class="pub-authors">Your Name, Co-author A, Co-author B</p>
+        <p class="pub-venue">Conference / Journal Name (VENUE'24)</p>
+        <div class="pub-links">
+          <a href="#">PDF</a>
+          <a href="#">arXiv</a>
+          <a href="#">Code</a>
+          <a href="#">Bibtex</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <span class="pub-year">2023</span>
+      <div>
+        <p class="pub-title">Another Paper Title: Towards Better Understanding</p>
+        <p class="pub-authors">Your Name, Co-author C</p>
+        <p class="pub-venue">Workshop / Conference Name (VENUE'23)</p>
+        <div class="pub-links">
+          <a href="#">PDF</a>
+          <a href="#">arXiv</a>
+          <a href="#">Slides</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <span class="pub-year">2022</span>
+      <div>
+        <p class="pub-title">Early Work: Foundations of My Research Direction</p>
+        <p class="pub-authors">Your Name, Advisor Name, Co-author D</p>
+        <p class="pub-venue">Journal of Important Research</p>
+        <div class="pub-links">
+          <a href="#">PDF</a>
+          <a href="#">DOI</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── PREPRINTS ─── -->
+<section id="preprints">
+  <h2>Preprints</h2>
+  <hr class="section-divider">
+  <div class="pub-list">
+
+    <!-- 复制此块添加更多预印本 -->
+    <div class="pub-item">
+      <span class="pub-year">2025</span>
+      <div>
+        <p class="pub-title">Preprint Title: Work in Progress</p>
+        <p class="pub-authors">Your Name, Co-author A</p>
+        <p class="pub-venue">arXiv preprint</p>
+        <div class="pub-links">
+          <a href="#">arXiv</a>
+          <a href="#">PDF</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── CV ─── -->
+<section id="cv">
+  <h2>CV</h2>
+  <hr class="section-divider">
+  <div class="cv-section">
+    <p class="cv-desc">
+      My full curriculum vitae includes education history, publications, talks, teaching experience, and awards. Last updated [Month Year].
+    </p>
+    <!-- 修改 href 为你的 CV 文件路径 -->
+    <a href="files/cv.pdf" class="text-link" download>Download CV (PDF)</a>
+  </div>
+</section>
+
+<!-- ─── CONTACT ─── -->
+<section id="contact">
+  <h2>Contact</h2>
+  <hr class="section-divider">
+  <!-- 修改为你的邮箱 -->
+  <a href="mailto:you@university.edu" class="contact-email-line">you@university.edu</a>
+</section>
+
+<footer>
+  <p>© 2024 Your Name · Built with plain HTML</p>
+</footer>
+
+<script>
+  // Scroll progress bar
+  window.addEventListener('scroll', () => {
+    const scroll = window.scrollY;
+    const height = document.body.scrollHeight - window.innerHeight;
+    document.getElementById('progress').style.width = (scroll / height * 100) + '%';
+  });
+
+  // Intersection observer for fade-in
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('section:not(#hero)').forEach(s => observer.observe(s));
+</script>
 </body>
 </html>
-
